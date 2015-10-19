@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Anthony Hayden C11733511 1 2b 3a 4a 5a 6</title>
+        <link type="text/css" href="app/css/style.css" rel="stylesheet"/>
+		<link type="text/css" href="app/css/bootstrap.css" rel="stylesheet"/>
+		
+		<script>
+			function collapsible_button()
+			{
+				$(".btn").click(function(){
+					if($(this).siblings().is(":visible"))
+					{
+						$(this).siblings().hide(300);
+					}
+					else
+					{
+						$(this).siblings().show(300);
+					}
+				});
+			}
+		</script>
+    </head>
+    <body>
+
+        <div id="container">
+			<section>
+			<h2>Tasks Completed: 1, 2b, 3a, 5a</h2>
+			</section>
+			<section id="task_1">
+				<a href ="#/questionnaires" class = "btn btn-primary btn-block"> Task 1 </a>
+				<article id="task_1_content"> 
+				<table class="table table-striped" >
+					<thead>
+					<tr>
+						<th>Task ID (Lecture)</th>
+						<th>Questionnaire ID</th>
+						<th>Student ID</th>
+						<th>RMSE Value</th>
+						<th>MWL Value</th>
+						<th>Questionnaire Type</th>
+						<th>Questionnaire Value</th>
+						<th>Duration (mins)</th>
+						<th>Intrusiveness</th>
+					</tr>
+					</thead>
+					<tbody id="task_1_table_body">
+					</tbody>
+					<tr id="avg_values"></tr>
+					<tr id="std_dev_values"></tr>
+				</table>
+				
+				<table class="table table-striped" id="avg_table">
+					<tbody id="avg_table_body">
+					</tbody>
+				</table>
+				
+				</article>
+			</section>
+			
+			<section id="task_2">
+				<a href ="#/nationalities" class = "btn btn-primary btn-block"> Task 2b </a>
+				<article id="task_2_content"> 
+					<div id="donut_window"></div>
+					<div id="legend_window"><ul id="legend_list"></ul></div>
+				</article>
+				
+			</section>
+			
+			<section id="task_3">
+				<a href ="#/questionnairesPerStudent" class = "btn btn-primary btn-block"> Task 3a </a>
+				<article id="task_3_content"> </article>
+			</section>
+			
+			<section>
+				<a href ="#/home" class = "btn btn-primary btn-block"> Task 4a </a>
+				<article id="task_4_content"> </article>
+			</section>
+			
+			<section id="task_5">
+				<a href ="#/questionnairesOfATask" class = "btn btn-primary btn-block"> Task 5a </a>
+				<article id="task_5_content"> </article>
+			</section>
+			
+			<section>
+				<a href ="#/home" class = "btn btn-primary btn-block"> Task 6 </a>
+				<article id="task_6_content"> </article>
+			</section>
+			
+			<!--Links to W3C validation-->
+		<footer>
+			<hr/>
+			<a href="http://jigsaw.w3.org/css-validator/validator?uri=http://lucalongo.eu/courses/2014-2015/RichWebApplicationTechnology/students/C11733511/finalproject/app/css/style.css">
+			<img src="images/css_validated.png" alt="css validator"/></a>
+			
+			<a href="http://validator.w3.org/check?uri=http://lucalongo.eu/courses/2014-2015/RichWebApplicationTechnology/students/C11733511/finalproject/index.html">
+				<img src="images/html5_validated.png" alt="html5 validator"/></a>
+		</footer>
+		
+        </div>
+		
+		
+        <!-- Templates -->
+		<script type="text/template" id="nationalitiesListItemTemplate"><li><%= country %></li></script>
+		
+		<script type="text/template" id="questionnaires-averages-template">
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+				<td>Avg: <%=  avg_rmse %></td>
+				<td>Avg: <%=  avg_mwl %></td>
+				<td> - </td>
+				<td>Avg: <%=  avg_questionnaire_value %></td>
+				<td>Avg: <%=  avg_duration %></td>
+				<td>Avg: <%=  avg_intrusiveness %></td>
+        </script>
+		
+		<script type="text/template" id="questionnaires-dev-template">
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+				<td>Dev: <%= std_rmse %></td>
+				<td>Dev: <%= std_mwl %></td>
+				<td> - </td>
+				<td>Dev: <%= std_questionnaire_value %></td>
+				<td>Dev: <%= std_duration %></td>
+				<td>Dev: <%= std_intrusiveness %></td>
+        </script>
+		
+        <script type="text/template" id="questionnaires-list-template" >
+							<td><%= details['task_number']%></td>
+							<td><%= id %></td>
+							<td><%= details['student_number'] %></td>
+							<td><%= details['rmse_value'] %></td>
+							<td><%= details['mwl_value'] %></td>
+							<td><%= questionnaireType %></td>
+							<td><%= questionnaireValue %></td>
+							<td><%= duration %></td>
+							<td><%= details['intrusiveness'] %></td>
+        </script>
+
+        <!-- JavaScript -->
+        <script src="libs/jquery.js"></script>
+        <script src="libs/d3.js"></script>
+        <script src="libs/underscore.js"></script>
+        <script src="libs/backbone.js"></script>
+        <script src="app/js/donut.js"></script>
+        <script src="app/js/main.js"></script>
+		<script>
+			collapsible_button();
+		</script>
+    </body>
+</html>

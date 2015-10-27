@@ -5,21 +5,28 @@ $.ajaxSetup({
 	contentType : "application/json",
 	dataType : "json"
 });
+
+$.ajaxSetup({'cache':true});
+
 // Base Url
-var baseUrl = "http://lucalongo.eu:80/courses/2014-2015/questionnaireDIT/app/index.php";
+var baseURL = "http://localhost:3000/statistics";
 
 //base model
 var BaseModel = Backbone.Model.extend();
 
 //questionnaire model
-var QuestionnaireDetailsModel = Backbone.Model.extend({
-	urlRoot: this.baseUrl + '/questionnaires'
+var QuestionnaireModel = Backbone.Model.extend({
+	model : BaseModel,
+    baseURL : this.baseURL,
+    initialize : function(options) {
+        this.url = this.baseURL + "/questionnaires/" + options.id;
+    }
 });
 
 //questionnaires collection
 var QuestionnairesCollection = Backbone.Collection.extend({
 	model : BaseModel,
-	url : this.baseUrl + "/questionnaires"
+	url : this.baseURL + "/questionnaires"
 });
 
 //questionnaires averages Model
@@ -29,7 +36,7 @@ var QuestionnairesAveragesModel = Backbone.Model.extend({
 
 //questionnaires Details Collection
 var QuestionnairesDetailsCollection = Backbone.Collection.extend({
-	model : QuestionnaireDetailsModel
+	model : QuestionnaireModel
 });
 
 //Nationalities Collection
@@ -123,39 +130,30 @@ var AppRouter = Backbone.Router.extend({
 		
 		//get collection of questionnaires
 		questionnairesCollection.fetch({
-			success : function() {
-			
-			//for each questionnaire get details and add to collection
-				_.each(questionnairesCollection.models, function(model){
-					var questionnaireDetailsModel = new QuestionnaireDetailsModel({id: model.get('id')});
-					
-					questionnaireDetailsModel.fetch({
-						success : function() {
-							counter ++;
-							//calculate duration 
-							questionnaireDetailsModel.set( 'duration', getMinutes(
-								questionnaireDetailsModel.get('details').time_1,
-								questionnaireDetailsModel.get('details').time_2).toFixed(1));
-							
-							questionnairesDetailsCollection.add(questionnaireDetailsModel);
-							
-							if (counter % 20 === 0 || counter === questionnairesCollection.length)
-							{
-								questionnairesListView.flush();
-								questionnairesListView.render();
-							}
-							
-							if( typeof RMSE_total === 'undefined'){
-								RMSE_total = questionnaireDetailsModel.get('details').rmse_value}
-							else{
-								RMSE_total += questionnaireDetailsModel.get('details').rmse_value};	
-							}
-					})
-				})
-			
-			}
-		})
-		
+            success: function () {
+
+                //for each questionnaire get details and add to collection
+                _.each(questionnairesCollection.models, function (model) {
+                    counter++;
+                    //calculate duration
+                    model.set('duration', getMinutes(
+                        model.get('time_1'),
+                        model.get('time_2').toFixed(1)));
+
+                    if (counter % 20 === 0 || counter === questionnairesCollection.length) {
+                        questionnairesListView.flush();
+                        questionnairesListView.render();
+                    }
+
+                    if (typeof RMSE_total === 'undefined') {
+                        RMSE_total = model.attributes.get('rmse_value');
+                    }
+                    else {
+                        RMSE_total += model.attributes.get('rmse_value');
+                    }
+                })
+            }
+        })
 	},
 	
 	nationalities : function() {
@@ -254,7 +252,7 @@ var AppRouter = Backbone.Router.extend({
 				})
 			}
 		});
-	},
+	}
 });
 
 //View

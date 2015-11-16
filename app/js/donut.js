@@ -87,7 +87,7 @@
 			
 		d3.select("#"+id).selectAll(".percent").data(_data).transition().duration(750)
 			.attrTween("x",textTweenX).attrTween("y",textTweenY).text(getPercent); 	
-	}
+	};
 	
 	Donut3D.draw=function(id, data, x /*center x*/, y/*center y*/, 
 			rx/*radius x*/, ry/*radius y*/, h/*height*/, ir/*inner radius*/){

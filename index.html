@@ -2,10 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Anthony Hayden C11733511 1 2b 3a 4a 5a 6</title>
+        <title>Student Questionnaires</title>
         <link type="text/css" href="app/css/style.css" rel="stylesheet"/>
 		<link type="text/css" href="app/css/bootstrap.css" rel="stylesheet"/>
-		
+
 		<script>
 			function collapsible_button()
 			{
@@ -22,27 +22,29 @@
 			}
 		</script>
     </head>
+
     <body>
 
         <div id="container">
 			<section>
-			<h2>Tasks Completed: 1, 2b, 3a, 5a</h2>
+				<h2>D3.js, Backbone.js - Demo</h2>
+				<p>
+					Demo of retrieving data from an API and displaying data in a meaningful manner. <br/>
+					<br/>
+					The data set represents a series of multi-choice questionnaires taken by students for tasks assigned by various college courses.
+				</p>
 			</section>
 			<section id="task_1">
+
 				<a href ="#/questionnaires" class = "btn btn-primary btn-block"> Task 1 </a>
-				<article id="task_1_content"> 
+				<article id="task_1_content">
 				<table class="table table-striped" >
 					<thead>
 					<tr>
 						<th>Task ID (Lecture)</th>
-						<th>Questionnaire ID</th>
-						<th>Student ID</th>
-						<th>RMSE Value</th>
-						<th>MWL Value</th>
-						<th>Questionnaire Type</th>
-						<th>Questionnaire Value</th>
-						<th>Duration (mins)</th>
-						<th>Intrusiveness</th>
+						<th>Number of Questionnaires</th>
+						<th>Average Duration</th>
+						<th>Average Intrusiveness</th>
 					</tr>
 					</thead>
 					<tbody id="task_1_table_body">
@@ -50,39 +52,39 @@
 					<tr id="avg_values"></tr>
 					<tr id="std_dev_values"></tr>
 				</table>
-				
+
 				<table class="table table-striped" id="avg_table">
 					<tbody id="avg_table_body">
 					</tbody>
 				</table>
-				
+
 				</article>
 			</section>
-			
+
 			<section id="task_2">
 				<a href ="#/nationalities" class = "btn btn-primary btn-block"> Task 2b </a>
-				<article id="task_2_content"> 
+				<article id="task_2_content">
 					<div id="donut_window"></div>
 					<div id="legend_window"><ul id="legend_list"></ul></div>
 				</article>
-				
+
 			</section>
-			
+
 			<section id="task_3">
 				<a href ="#/questionnairesPerStudent" class = "btn btn-primary btn-block"> Task 3a </a>
 				<article id="task_3_content"> </article>
 			</section>
-			
+
 			<section>
 				<a href ="#/home" class = "btn btn-primary btn-block"> Task 4a </a>
 				<article id="task_4_content"> </article>
 			</section>
-			
+
 			<section id="task_5">
 				<a href ="#/questionnairesOfATask" class = "btn btn-primary btn-block"> Task 5a </a>
 				<article id="task_5_content"> </article>
 			</section>
-			
+
 			<section>
 				<a href ="#/home" class = "btn btn-primary btn-block"> Task 6 </a>
 				<article id="task_6_content"> </article>
@@ -129,15 +131,10 @@
         </script>
 		
         <script type="text/template" id="questionnaires-list-template" >
-							<td><%= details['task_number']%></td>
-							<td><%= id %></td>
-							<td><%= details['student_number'] %></td>
-							<td><%= details['rmse_value'] %></td>
-							<td><%= details['mwl_value'] %></td>
-							<td><%= questionnaireType %></td>
-							<td><%= questionnaireValue %></td>
-							<td><%= duration %></td>
-							<td><%= details['intrusiveness'] %></td>
+							<td><%= task_number %></td>
+							<td><%= num_questionnaires %></td>
+							<td><%= average_duration %></td>
+							<td><%= average_intrusiveness %></td>
         </script>
 
         <!-- JavaScript -->
@@ -147,6 +144,7 @@
         <script src="libs/backbone.js"></script>
         <script src="app/js/donut.js"></script>
         <script src="app/js/main.js"></script>
+        <script src="app/js/utils.js"></script>
 		<script>
 			collapsible_button();
 		</script>

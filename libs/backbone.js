@@ -235,7 +235,7 @@
     // want global "pubsub" in a convenient place.
     _.extend(Backbone, Events);
 
-    // Backbone.Model
+    // Backbone.Models
     // --------------
 
     // Backbone **Models** are the basic data object in the framework --
@@ -258,7 +258,7 @@
         this.initialize.apply(this, arguments);
     };
 
-    // Attach all inheritable methods to the Model prototype.
+    // Attach all inheritable methods to the Models prototype.
     _.extend(Model.prototype, Events, {
 
         // A hash of attributes whose current and previous value differ.
@@ -573,10 +573,10 @@
 
     });
 
-    // Underscore methods that we want to implement on the Model.
+    // Underscore methods that we want to implement on the Models.
     var modelMethods = ['keys', 'values', 'pairs', 'invert', 'pick', 'omit'];
 
-    // Mix in each Underscore method as a proxy to `Model#attributes`.
+    // Mix in each Underscore method as a proxy to `Models#attributes`.
     _.each(modelMethods, function(method) {
         Model.prototype[method] = function() {
             var args = slice.call(arguments);
@@ -614,7 +614,7 @@
     // Define the Collection's inheritable methods.
     _.extend(Collection.prototype, Events, {
 
-        // The default model for a collection is just a **Backbone.Model**.
+        // The default model for a collection is just a **Backbone.Models**.
         // This should be overridden in most cases.
         model: Model,
 
@@ -663,7 +663,7 @@
 
         // Update a collection by `set`-ing a new list of models, adding new ones,
         // removing models that are no longer present, and merging models that
-        // already exist in the collection, as necessary. Similar to **Model#set**,
+        // already exist in the collection, as necessary. Similar to **Models#set**,
         // the core operation for updating the data contained by the collection.
         set: function(models, options) {
             options = _.defaults({}, options, setOptions);

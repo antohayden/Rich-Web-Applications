@@ -8,7 +8,8 @@ var AppRouter = Backbone.Router.extend({
 
     routes : {
         '' : 'home',
-        "questionnaires" : "questionnaires"
+        "questionnaires" : "questionnaires",
+        "nationalities" : "nationalities"
     },
 
     home : function(){
@@ -80,6 +81,46 @@ var AppRouter = Backbone.Router.extend({
             }
 
         });
+    },
+
+    nationalities : function () {
+
+        $("article").hide(300);
+        $("#task_2_content").show(300);
+
+        var nationalitiesCollection = new StudentNationalitiesCollection();
+        var nationalitiesCountCollection = new BaseCollection();
+        var studentsOfANationalitieView = new
+            StudentsOfANationalitieView({
+            collection : nationalitiesCountCollection
+        });
+
+        nationalitiesCollection.fetch({
+            success: function() {
+                _.each(nationalitiesCollection.models, function(model){
+
+                    var studentsOfANationalitieCollection =
+                        new StudentsOfANationalityCollection(model.get("description"));
+
+                    studentsOfANationalitieCollection.fetch({
+                        success : function(){
+                            var nationalitiesCountModel = new BaseModel();
+                            nationalitiesCountModel.set('country', model.get('description'));
+                            nationalitiesCountModel.set('count', studentsOfANationalitieCollection.length);
+                            nationalitiesCountModel.set('color', generateColor());
+                            nationalitiesCountCollection.add(nationalitiesCountModel);
+
+                            studentsOfANationalitieView.flush();
+                            studentsOfANationalitieView.render();
+                        }
+                    });
+                })
+
+            }
+        });
+
+
+
     }
 
 });

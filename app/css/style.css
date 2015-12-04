@@ -27,7 +27,7 @@ footer{
 
 #task_2_content
 {
-	max-height : 500px;
+	max-height : 600px;
 	overflow-y: scroll;
 	position: relative;
 }
@@ -71,23 +71,17 @@ svg text.percent{
 {
 	position: relative;
 	display: inline-block;
-	width: 75%;
 	height: 100%;
 	font-weight: bold;
+	text-align: center;
 }
 
 #legend_window
 {	
 	position: absolute;
-	width: 20%;
 	display: inline-block;
 	height: 100%;
 	font-weight: bold;
-}
-
-#legend_list
-{
-	list-style-type: square;
 }
 
 

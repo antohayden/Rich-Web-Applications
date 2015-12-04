@@ -22,7 +22,10 @@ function getMilliSecondsBetweenTime( start, end )
     return duration;
 }
 
-//create random color
+/*
+* Returns a random color
+*/
+
 function generateColor(){
     var newColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
     return newColor;

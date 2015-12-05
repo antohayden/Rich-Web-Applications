@@ -9,7 +9,8 @@ var AppRouter = Backbone.Router.extend({
     routes : {
         '' : 'home',
         "questionnaires" : "questionnaires",
-        "nationalities" : "nationalities"
+        "nationalities" : "nationalities",
+        "questionnairesPerStudent" : "questionnairesPerStudent"
     },
 
     home : function(){
@@ -121,6 +122,40 @@ var AppRouter = Backbone.Router.extend({
 
 
 
+    },
+
+    questionnairesPerStudent : function(){
+
+        $("article").hide(300);
+        $("#task_3_content").show(300);
+        var studentsCollection = new StudentsCollection();
+        var questionnairesByStudentsCount = new BaseCollection();
+        var questionnairesByStudentsView = new
+            QuestionnairesByStudentsView({
+            collection : questionnairesByStudentsCount
+        });
+
+        studentsCollection.fetch({
+
+            success : function(){
+                _.each(studentsCollection.models, function(model){
+                    var questionnairesByAStudent = new QuestionnairesCollectionByStudentId(model.get('student_number'));
+
+                    questionnairesByAStudent.fetch({
+
+                        success : function(){
+                            questionnairesByStudentsCount.add({
+                                'student_number' : model.get('student_number'),
+                                'num_questionnaires' : questionnairesByAStudent.length
+                            });
+                            questionnairesByStudentsView.flush();
+                            questionnairesByStudentsView.render();
+                        }
+                    });
+
+                })
+            }
+        })
     }
 
 });

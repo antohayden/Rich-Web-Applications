@@ -28,8 +28,9 @@ footer{
 #task_2_content
 {
 	max-height : 600px;
-	overflow-y: scroll;
 	position: relative;
+	overflow-y: scroll;
+	padding-top: 30px;
 }
 
 #task_3_content
@@ -40,7 +41,6 @@ footer{
 	padding-bottom: 10px;
 }
 
-
 #task_5_content
 {
 	max-height : 500px;
@@ -48,8 +48,6 @@ footer{
 	position: relative;
 	padding-bottom: 10px;
 }
-
-
 
 path.slice{
 	stroke-width:2px;

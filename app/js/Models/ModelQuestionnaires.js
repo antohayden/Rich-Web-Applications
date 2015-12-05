@@ -47,3 +47,14 @@ var QuestionnairesCollectionByTaskId= Backbone.Collection.extend({
         this.url = this.baseURL + "/questionnaires/task/" + task_number
     }
 });
+
+/*
+ * A list of questionnaires associated with a student id
+ * */
+var QuestionnairesCollectionByStudentId= Backbone.Collection.extend({
+    model : BaseModel,
+    baseURL : this.baseURL,
+    initialize : function(student_number) {
+        this.url = this.baseURL + "/questionnaires/student/" + student_number
+    }
+});

@@ -1,4 +1,3 @@
-
 var QuestionnairesByStudentsView = Backbone.View.extend({
 
     el : $('#task_3_content'),

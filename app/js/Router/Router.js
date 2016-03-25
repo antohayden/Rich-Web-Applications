@@ -2,7 +2,6 @@
 * Backbone Router for various paths & views
 * */
 
-
 // Router
 var AppRouter = Backbone.Router.extend({
 
@@ -10,7 +9,8 @@ var AppRouter = Backbone.Router.extend({
         '' : 'home',
         "questionnaires" : "questionnaires",
         "nationalities" : "nationalities",
-        "questionnairesPerStudent" : "questionnairesPerStudent"
+        "questionnairesPerStudent" : "questionnairesPerStudent",
+        "questionnairesOfATask" : "questionnairesOfATask"
     },
 
     home : function(){
@@ -156,6 +156,80 @@ var AppRouter = Backbone.Router.extend({
                 })
             }
         })
+    },
+
+    numTasksPerCourse: function(){
+
+        $("article").hide(300);
+        $("#task_4_content").show(300);
+
+        var taskCollection = new TasksCollection();
+        var taskModel = new BaseModel();
+        var tasksPerCourseCollection = new BaseCollection();
+
+        var taskPerCourseView = new
+            TaskPerCourseView({
+            collection : tasksPerCourseCollection
+        });
+
+        taskCollection.fetch({
+
+            success : function(){
+                _.each(taskCollection.models, function(model){
+
+                    taskModel.add({
+                        'task_id': model.get('task_id'),
+                        'duration' : model.get('duration_mins')
+                    });
+
+                    
+
+                    questionnairesByAStudent.fetch({
+
+                        success : function(){
+                            questionnairesByStudentsCount.add({
+                                'student_number' : model.get('student_number'),
+                                'num_questionnaires' : questionnairesByAStudent.length
+                            });
+                            taskPerCourseView.flush();
+                            taskPerCourseView.render();
+                        }
+                    });
+
+                })
+            }
+        })
+    },
+
+    questionnairesOfATask : function(){
+        $("article").hide(300);
+        $("#task_5_content").show(300);
+
+        var tasksCollection = new TasksCollection();
+        var questionnairesByTaskCount = new BaseCollection();
+        var questionnairesByTaskView = new QuestionnairesByTaskView({
+            collection : questionnairesByTaskCount
+        });
+
+        tasksCollection.fetch({
+            success : function(){
+                _.each(tasksCollection.models, function(model){
+                    var questionnairesOfATask = new QuestionnairesCollectionByTaskId(model.get('task_id'));
+
+                    questionnairesOfATask.fetch({
+                        success : function(){
+                            questionnairesByTaskCount.add({
+                                'task_number' : model.get('task_id'),
+                                'num_questionnaires' : questionnairesOfATask.length
+                            });
+                            questionnairesByTaskView.flush();
+                            questionnairesByTaskView.render();
+                        }
+                    })
+
+                })
+            }
+        });
     }
 
 });

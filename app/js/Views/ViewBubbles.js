@@ -2,61 +2,61 @@ var TaskPerCourseView = Backbone.View.extend({
 
     el : $('#task_4_content'),
 
+
+    flush : function() {
+        this.$el.empty();
+    },
+
     render : function(){
 
+        this.$el.prepend('<h3>Tasks completed per Course</h3>');
         var data = this.collection.toJSON();
 
-        var diameter = 960,
-            format = d3.format(",d"),
-            color = d3.scale.category20c();
+        var diameter = 700;
+
+        var svg = d3.select('#task_4_content').append('svg')
+            .attr('width', diameter)
+            .attr('height', diameter);
 
         var bubble = d3.layout.pack()
-            .sort(null)
             .size([diameter, diameter])
-            .padding(1.5);
+            .padding(3) // padding between adjacent circles
+            .value(function(d) {return d.size;}) ;// new data will be loaded to bubble layout
 
-        var svg = d3.select("body").append("svg")
-            .attr("width", diameter)
-            .attr("height", diameter)
-            .attr("class", "bubble");
+        var nodes = bubble.nodes(processData(data))
+            .filter(function(d) { return !d.children; }); // filter out the outer bubble
 
-        d3.json(data, function(error, root) {
-            if (error) throw error;
+        var vis = svg.selectAll('circle')
+            .data(nodes, function(d) { return d.name; });
 
-            var node = svg.selectAll(".node")
-                .data(bubble.nodes(classes(root))
-                    .filter(function(d) { return !d.children; }))
-                .enter().append("g")
-                .attr("class", "node")
-                .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        vis.enter().append('circle')
+            .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; })
+            .attr('r', function(d) { return d.r; })
+            .attr('class', function(d) { return d.className; })
+            .append("svg:title")
+            .text(function(d) {return "duration : "+ d.size + " mins";});
 
-            node.append("title")
-                .text(function(d) { return d.className + ": " + format(d.value); });
 
-            node.append("circle")
-                .attr("r", function(d) { return d.r; })
-                .style("fill", function(d) { return color(d.packageName); });
 
-            node.append("text")
-                .attr("dy", ".3em")
-                .style("text-anchor", "middle")
-                .text(function(d) { return d.className.substring(0, d.r / 3); });
-        });
+        function processData(data) {
+            console.log(data);
+            var obj = data;
 
-// Returns a flattened hierarchy containing all leaf nodes under the root.
-        function classes(root) {
-            var classes = [];
+            var newDataSet = [];
 
-            function recurse(name, node) {
-                if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-                else classes.push({packageName: name, className: node.name, value: node.size});
+            for(var prop in obj) {
+                var sheet = document.styleSheets[0];
+                sheet.addRule(".course_"+ obj[prop].course_id, "fill:" + generateColor() , 1);
+
+                newDataSet.push({
+                    name: obj[prop].task_id,
+                    className: "course_" + obj[prop].course_id,
+                    size: parseInt(obj[prop].duration_mins)}
+                );
             }
-
-            recurse(null, root);
-            return {children: classes};
+            return {children: newDataSet};
         }
 
-        d3.select(self.frameElement).style("height", diameter + "px");
 
     }
 

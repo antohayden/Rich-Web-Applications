@@ -10,7 +10,8 @@ var AppRouter = Backbone.Router.extend({
         "questionnaires" : "questionnaires",
         "nationalities" : "nationalities",
         "questionnairesPerStudent" : "questionnairesPerStudent",
-        "questionnairesOfATask" : "questionnairesOfATask"
+        "questionnairesOfATask" : "questionnairesOfATask",
+        "tasksOfACourse" : "tasksOfACourse"
     },
 
     home : function(){
@@ -158,47 +159,51 @@ var AppRouter = Backbone.Router.extend({
         })
     },
 
-    numTasksPerCourse: function(){
+    tasksOfACourse: function(){
 
         $("article").hide(300);
         $("#task_4_content").show(300);
 
-        var taskCollection = new TasksCollection();
-        var taskModel = new BaseModel();
-        var tasksPerCourseCollection = new BaseCollection();
-
-        var taskPerCourseView = new
-            TaskPerCourseView({
-            collection : tasksPerCourseCollection
+        var coursesCollections = new CoursesCollection();
+        var sortedCoursesCollection = new BaseCollection();
+        var tasksCollection = new TasksCollection();
+        var tasksPerCourseView = new TaskPerCourseView({
+            //collection : sortedCoursesCollection
+            collection : tasksCollection
         });
 
-        taskCollection.fetch({
+
+        tasksCollection.fetch({
 
             success : function(){
-                _.each(taskCollection.models, function(model){
-
-                    taskModel.add({
-                        'task_id': model.get('task_id'),
-                        'duration' : model.get('duration_mins')
-                    });
-
-                    
-
-                    questionnairesByAStudent.fetch({
-
-                        success : function(){
-                            questionnairesByStudentsCount.add({
-                                'student_number' : model.get('student_number'),
-                                'num_questionnaires' : questionnairesByAStudent.length
-                            });
-                            taskPerCourseView.flush();
-                            taskPerCourseView.render();
-                        }
-                    });
-
-                })
+                tasksPerCourseView.flush();
+                tasksPerCourseView.render();
             }
-        })
+        });
+        //coursesCollections.fetch({
+        //
+        //    success : function(){
+        //        _.each(coursesCollections.models, function(model){
+        //
+        //            var tasksOfACourseCollection = new TasksOfACourseCollection(model.get('id_course'));
+        //            tasksOfACourseCollection.fetch({
+        //                success : function(){
+        //
+        //                    var sortedCourse = new BaseModel();
+        //                    sortedCourse.set('course_id', model.get('id_course'));
+        //                    sortedCourse.set('tasks', tasksOfACourseCollection);
+        //
+        //                    sortedCoursesCollection.add(sortedCourse);
+        //
+        //                    tasksPerCourseView.flush();
+        //                    tasksPerCourseView.render();
+        //
+        //                }
+        //            });
+        //        });
+        //
+        //    }
+        //});
     },
 
     questionnairesOfATask : function(){

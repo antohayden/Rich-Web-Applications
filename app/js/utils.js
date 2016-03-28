@@ -31,6 +31,16 @@ function generateColor(){
     return newColor;
 }
 
+function createCSSClass(selector, style) {
+    if (!document.styleSheets) {
+        return;
+    }
+
+    if (document.getElementsByTagName("head").length == 0) {
+        return;
+    }
+}
+
 function convertMilliSecondsToMinutesString(numMilliSecs){
 
     var numSecs = numMilliSecs / 1000;
@@ -40,3 +50,41 @@ function convertMilliSecondsToMinutesString(numMilliSecs){
 
     return (numMins.toString() + ' mins ' + remainingSeconds + ' secs');
 }
+
+
+/*
+* Checks if an array contains a value
+* http://stackoverflow.com/questions/1181575/determine-whether-an-array-contains-a-value
+*
+*   EXAMPLE:
+*
+    var myArray = [0,1,2],
+    needle = 1,
+    index = contains.call(myArray, needle); // true
+* */
+var contains = function(needle) {
+    // Per spec, the way to identify NaN is that it is not equal to itself
+    var findNaN = needle !== needle;
+    var indexOf;
+
+    if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index = -1;
+
+            for(i = 0; i < this.length; i++) {
+                var item = this[i];
+
+                if((findNaN && item !== item) || item === needle) {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        };
+    }
+
+    return indexOf.call(this, needle) > -1;
+};

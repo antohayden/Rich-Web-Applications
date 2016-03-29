@@ -165,45 +165,42 @@ var AppRouter = Backbone.Router.extend({
         $("#task_4_content").show(300);
 
         var coursesCollections = new CoursesCollection();
-        var sortedCoursesCollection = new BaseCollection();
         var tasksCollection = new TasksCollection();
         var tasksPerCourseView = new TaskPerCourseView({
-            //collection : sortedCoursesCollection
             collection : tasksCollection
         });
 
+        var coursesLegendView = new CoursesLegendView({
+            collection : coursesCollections
+        });
 
         tasksCollection.fetch({
 
             success : function(){
-                tasksPerCourseView.flush();
-                tasksPerCourseView.render();
+
+                coursesCollections.fetch({
+
+                    success : function() {
+
+                        _.each(coursesCollections.models, function(courseModel){
+
+                            var color = generateColor();
+                            courseModel.set("color", color);
+
+                            _.each(tasksCollection.models, function(taskModel){
+                                if(taskModel.get("course_id") === courseModel.get("id_course"))
+                                   taskModel.set("color", color);
+                            })
+                        });
+
+                        tasksPerCourseView.flush();
+                        tasksPerCourseView.render();
+                        coursesLegendView.flush();
+                        coursesLegendView.render();
+                    }
+                });
             }
         });
-        //coursesCollections.fetch({
-        //
-        //    success : function(){
-        //        _.each(coursesCollections.models, function(model){
-        //
-        //            var tasksOfACourseCollection = new TasksOfACourseCollection(model.get('id_course'));
-        //            tasksOfACourseCollection.fetch({
-        //                success : function(){
-        //
-        //                    var sortedCourse = new BaseModel();
-        //                    sortedCourse.set('course_id', model.get('id_course'));
-        //                    sortedCourse.set('tasks', tasksOfACourseCollection);
-        //
-        //                    sortedCoursesCollection.add(sortedCourse);
-        //
-        //                    tasksPerCourseView.flush();
-        //                    tasksPerCourseView.render();
-        //
-        //                }
-        //            });
-        //        });
-        //
-        //    }
-        //});
     },
 
     questionnairesOfATask : function(){

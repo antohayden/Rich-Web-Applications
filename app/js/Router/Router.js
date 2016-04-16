@@ -192,13 +192,13 @@ var AppRouter = Backbone.Router.extend({
                                    taskModel.set("color", color);
                             })
                         });
-
-                        tasksPerCourseView.flush();
-                        tasksPerCourseView.render();
                         coursesLegendView.flush();
+                        tasksPerCourseView.flush();
                         coursesLegendView.render();
+                        tasksPerCourseView.render();
                     }
                 });
+
             }
         });
     },

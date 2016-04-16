@@ -41,6 +41,12 @@ footer{
 	padding-bottom: 10px;
 }
 
+#task_4_content
+{
+	position: relative;
+	padding-bottom: 10px;
+}
+
 #task_5_content
 {
 	max-height : 500px;

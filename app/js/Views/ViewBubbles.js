@@ -9,12 +9,12 @@ var TaskPerCourseView = Backbone.View.extend({
 
     render : function(){
 
-        this.$el.prepend('<h3>Tasks completed per Course</h3>');
+        this.$el.prepend('<h3>Number of tasks & their duration per Course</h3>');
         var data = this.collection.toJSON();
 
-        var diameter = 700;
+        var diameter = 500;
 
-        var svg = d3.select('#task_4_content').append('svg')
+        var svg = d3.select('#task_4_window').append('svg')
             .attr('width', diameter)
             .attr('height', diameter);
 
@@ -80,7 +80,7 @@ var CoursesLegendView = Backbone.View.extend({
             that.$el[0].childNodes[index].style.border = "solid black 1px";
             that.$el[0].childNodes[index].style.color = "white";
             that.$el[0].childNodes[index].style.display = "inline-block";
-            that.$el[0].childNodes[index].style.width = "49%";
+            that.$el[0].childNodes[index].style.width = "100%";
             that.$el[0].childNodes[index].style.margin = "0.5px";
             that.$el[0].childNodes[index].style.fontSize = "2vh";
             that.$el[0].childNodes[index].style.textShadow= "1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000";

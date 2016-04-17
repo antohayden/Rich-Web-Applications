@@ -33,26 +33,48 @@ footer{
 	padding-top: 30px;
 }
 
-#task_3_content
-{
+#task_3_content {
 	max-height : 500px;
 	overflow-y: scroll;
 	position: relative;
 	padding-bottom: 10px;
 }
 
-#task_4_content
-{
+#task_4_content {
 	position: relative;
 	padding-bottom: 10px;
+    display: flex;
+    flex-direction: row;
 }
 
-#task_5_content
-{
+#task_4_legend{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    text-align: center;
+    padding: 3%;
+}
+
+#task_4_window{
+    display: flex;
+    align-items: center;
+    flex-grow: 2;
+    flex-direction: column;
+}
+
+#task_5_content {
 	max-height : 500px;
 	overflow-y: scroll;
 	position: relative;
 	padding-bottom: 10px;
+}
+
+#task_5 text {
+    font: 10px sans-serif;
+}
+
+#task_5 rect.background {
+    fill: white;
 }
 
 path.slice{
@@ -114,13 +136,6 @@ svg text.percent{
 }
 
 
-#task_5 text {
-  font: 10px sans-serif;
-}
-
-#task_5 rect.background {
-  fill: white;
-}
 
 
 

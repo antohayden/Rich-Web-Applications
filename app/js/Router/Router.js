@@ -192,6 +192,7 @@ var AppRouter = Backbone.Router.extend({
                                    taskModel.set("color", color);
                             })
                         });
+
                         coursesLegendView.flush();
                         tasksPerCourseView.flush();
                         coursesLegendView.render();

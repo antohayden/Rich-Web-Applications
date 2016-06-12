@@ -14,7 +14,7 @@ var TaskPerCourseView = Backbone.View.extend({
 
         var diameter = 700;
 
-        var svg = d3.select('#task_4_content').append('svg')
+        var svg = d3.select('#task_4_window').append('svg')
             .attr('width', diameter)
             .attr('height', diameter);
 

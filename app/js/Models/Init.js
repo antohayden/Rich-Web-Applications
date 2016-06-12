@@ -1,6 +1,6 @@
 
 // Base Url
-var baseURL = "http://localhost:3000/statistics";
+var baseURL = "http://localhost/statistics";
 
 //base model
 var BaseModel = Backbone.Model.extend();

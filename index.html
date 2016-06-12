@@ -6,21 +6,6 @@
         <link type="text/css" href="app/css/style.css" rel="stylesheet"/>
 		<link type="text/css" href="app/css/bootstrap.css" rel="stylesheet"/>
 
-		<script>
-			function collapsible_button()
-			{
-				$(".btn").click(function(){
-					if($(this).siblings().is(":visible"))
-					{
-						$(this).siblings().hide(300);
-					}
-					else
-					{
-						$(this).siblings().show(300);
-					}
-				});
-			}
-		</script>
     </head>
 
     <body>
@@ -34,77 +19,130 @@
 					The data set represents a series of multi-choice questionnaires taken by students for tasks assigned by various college courses.
 				</p>
 			</section>
-			<section id="task_1">
 
-				<a href ="#questionnaires" class = "btn btn-primary btn-block"> Questionnaire Statistics </a>
-				<article id="task_1_content">
-				<table class="table table-striped" >
-					<thead>
-					<tr>
-						<th>Task ID (Lecture)</th>
-						<th>Number of Questionnaires</th>
-						<th>Average Duration</th>
-						<th>Average Intrusiveness</th>
-					</tr>
-					</thead>
-					<tbody id="task_1_table_body">
-					</tbody>
-					<tr id="avg_values"></tr>
-					<tr id="std_dev_values"></tr>
-				</table>
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse1" data-toggle="collapse" data-parent="#accordion" href="#questionnaires"> Questionnaire Statistics </a>
+						</h4>
+					</div>
 
-				<table class="table table-striped" id="avg_table">
-					<tbody id="avg_table_body">
-					</tbody>
-				</table>
+					<div id="collapse1" class="panel-collapse collapse">
+						<div id="task_1" class="panel-body">
+							<article id="task_1_content">
+								<table class="table table-striped" >
+									<thead>
+									<tr>
+										<th>Task ID (Lecture)</th>
+										<th>Number of Questionnaires</th>
+										<th>Average Duration</th>
+										<th>Average Intrusiveness</th>
+									</tr>
+									</thead>
+									<tbody id="task_1_table_body">
+									</tbody>
+									<tr id="avg_values"></tr>
+									<tr id="std_dev_values"></tr>
+								</table>
 
-				</article>
-			</section>
+								<table class="table table-striped" id="avg_table">
+									<tbody id="avg_table_body">
+									</tbody>
+								</table>
 
-			<section id="task_2">
-				<a href ="#nationalities" class = "btn btn-primary btn-block"> Breakdown of Student Nationalities </a>
-				<article id="task_2_content">
-					<div id="donut_window"></div>
-					<div id="legend_window"><div id="legend_list"></div></div>
-				</article>
+							</article>
+						</div>
 
-			</section>
+					</div>
 
-			<section id="task_3">
-				<a href ="#questionnairesPerStudent" class = "btn btn-primary btn-block"> Number of Questionnaires answered by Student ID </a>
-				<article id="task_3_content"> </article>
-			</section>
 
-			<section id="task_4">
-				<a href ="#tasksOfACourse" class = "btn btn-primary btn-block"> Tasks & Duration per Course </a>
-				<article id="task_4_content">
-                    <div id="task_4_window"></div>
-                    <div id="task_4_legend"></div>
-                </article>
-			</section>
+				</div>
 
-			<section id="task_5">
-				<a href ="#questionnairesOfATask" class = "btn btn-primary btn-block"> Questions answered per task </a>
-				<article id="task_5_content"> </article>
-			</section>
-			
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse2" href="#nationalities" data-toggle="collapse" data-parent="#accordion"> Breakdown of Student Nationalities </a>
+						</h4>
+					</div>
+
+					<div id="collapse2" class="panel-collapse collapse">
+						<section id="task_2" class="panel-body">
+							<article id="task_2_content">
+								<div id="donut_window"></div>
+								<div id="legend_window"><div id="legend_list"></div></div>
+							</article>
+						</section>
+					</div>
+
+
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse3" href="#questionnairesPerStudent" data-toggle="collapse" data-parent="#accordion">  Number of Questionnaires answered by Student ID </a>
+						</h4>
+					</div>
+
+					<div id="collapse3" class="panel-collapse collapse">
+						<section id="task_3" class="panel-body">
+							<article id="task_3_content"> Test</article>
+						</section>
+					</div>
+
+
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse4" href="#tasksOfACourse" data-toggle="collapse" data-parent="#accordion"> Tasks & Duration per Course </a>
+						</h4>
+					</div>
+
+					<div id="collapse4" class="panel-collapse collapse">
+						<section id="task_4" class="panel-body">
+							<article id="task_4_content">
+								<div id="task_4_window"></div>
+								<div id="task_4_legend"></div>
+							</article>
+						</section>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse5" href="#questionnairesOfATask" data-toggle="collapse" data-parent="#accordion"> Tasks & Duration per Course </a>
+						</h4>
+					</div>
+
+					<div id="collapse5" class="panel-collapse collapse">
+						<section id="task_5" class="panel-body">
+							<article id="task_5_content"> </article>
+						</section>
+					</div>
+				</div>
+
+			</div>
 			<!--Links to W3C validation-->
 		<footer>
 			<hr/>
 			<a href="http://jigsaw.w3.org/css-validator/validator?uri=http://lucalongo.eu/courses/2014-2015/RichWebApplicationTechnology/students/C11733511/finalproject/app/css/style.css">
 			<img src="images/css_validated.png" alt="css validator"/></a>
-			
+
 			<a href="http://validator.w3.org/check?uri=http://lucalongo.eu/courses/2014-2015/RichWebApplicationTechnology/students/C11733511/finalproject/index.html">
 				<img src="images/html5_validated.png" alt="html5 validator"/></a>
 		</footer>
-		
+
         </div>
-		
-		
+
+
         <!-- Templates -->
 		<script type="text/template" id="nationalitiesListItemTemplate"><div><%= country %></div></script>
         <script type="text/template" id="bubbleListItemTemplate"><div><%= description %></div></script>
-		
+
 		<script type="text/template" id="questionnaires-averages-template">
 				<td> - </td>
 				<td> - </td>
@@ -116,7 +154,7 @@
 				<td>Avg: <%=  avg_duration %></td>
 				<td>Avg: <%=  avg_intrusiveness %></td>
         </script>
-		
+
 		<script type="text/template" id="questionnaires-dev-template">
 				<td> - </td>
 				<td> - </td>
@@ -128,7 +166,7 @@
 				<td>Dev: <%= std_duration %></td>
 				<td>Dev: <%= std_intrusiveness %></td>
         </script>
-		
+
         <script type="text/template" id="questionnaires-list-template" >
 							<td><%= task_number %></td>
 							<td><%= num_questionnaires %></td>
@@ -137,7 +175,9 @@
         </script>
 
         <!-- JavaScript -->
-        <script src="libs/jquery.js"></script>
+        <script src="libs/jquery-3.0.0.js"></script>
+		<script src="libs/jquery-2.2.3.js"></script>
+        <script src="libs/bootstrap.js"></script>
         <script src="libs/d3.js"></script>
         <script src="libs/underscore.js"></script>
         <script src="libs/backbone.js"></script>
@@ -155,8 +195,5 @@
         <script src="app/js/Router/Router.js"></script>
         <script src="app/js/main.js"></script>
         <script src="app/js/utils.js"></script>
-		<script>
-			collapsible_button();
-		</script>
-    </body>
+    <!--</body>-->
 </html>

@@ -15,13 +15,9 @@ var AppRouter = Backbone.Router.extend({
     },
 
     home : function(){
-        $('article').hide(300);
     },
 
     questionnaires : function(){
-
-        $("article").hide(300);
-        $("#task_1_content").show(300);
 
         var questionnairesCount = new QuestionnairesCountByTaskCollection();
         var questionnairesByTaskCount = new BaseCollection();
@@ -87,9 +83,6 @@ var AppRouter = Backbone.Router.extend({
 
     nationalities : function () {
 
-        $("article").hide(300);
-        $("#task_2_content").show(300);
-
         var nationalitiesCollection = new StudentNationalitiesCollection();
         var nationalitiesCountCollection = new BaseCollection();
         var studentsOfANationalitieView = new
@@ -126,9 +119,6 @@ var AppRouter = Backbone.Router.extend({
     },
 
     questionnairesPerStudent : function(){
-
-        $("article").hide(300);
-        $("#task_3_content").show(300);
         var studentsCollection = new StudentsCollection();
         var questionnairesByStudentsCount = new BaseCollection();
         var questionnairesByStudentsView = new
@@ -160,9 +150,6 @@ var AppRouter = Backbone.Router.extend({
     },
 
     tasksOfACourse: function(){
-
-        $("article").hide(300);
-        $("#task_4_content").show(300);
 
         var coursesCollections = new CoursesCollection();
         var tasksCollection = new TasksCollection();
@@ -204,8 +191,6 @@ var AppRouter = Backbone.Router.extend({
     },
 
     questionnairesOfATask : function(){
-        $("article").hide(300);
-        $("#task_5_content").show(300);
 
         var tasksCollection = new TasksCollection();
         var questionnairesByTaskCount = new BaseCollection();

@@ -1,7 +1,7 @@
-html 
-{
-    overflow-y: scroll; 
-}
+/*html*/
+/*{*/
+    /*overflow-y: scroll;*/
+/*}*/
 
 
 footer{
@@ -12,12 +12,11 @@ footer{
 	bottom: 0;
 }
 
-#task_1_content
-{
-	max-height : 500px;
-	overflow-y: scroll;
-	position: relative;
+.panel-title > a {
+	display: block;
+	text-align: center;
 }
+
 
 #container
 {
@@ -25,35 +24,6 @@ footer{
 	margin: 20px auto;
 }
 
-#task_2_content
-{
-	max-height : 600px;
-	position: relative;
-	overflow-y: scroll;
-	padding-top: 30px;
-}
-
-#task_3_content
-{
-	max-height : 500px;
-	overflow-y: scroll;
-	position: relative;
-	padding-bottom: 10px;
-}
-
-#task_4_content
-{
-	position: relative;
-	padding-bottom: 10px;
-}
-
-#task_5_content
-{
-	max-height : 500px;
-	overflow-y: scroll;
-	position: relative;
-	padding-bottom: 10px;
-}
 
 path.slice{
 	stroke-width:2px;
@@ -63,7 +33,7 @@ polyline{
 	stroke: black;
 	stroke-width: 2px;
 	fill: none;
-} 
+}
 svg text.percent{
 	fill:white;
 	text-anchor:middle;
@@ -71,22 +41,22 @@ svg text.percent{
 	text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
-#donut_window
-{
-	position: relative;
-	display: inline-block;
-	height: 100%;
-	font-weight: bold;
-	text-align: center;
-}
+/*#donut_window*/
+/*{*/
+	/*position: relative;*/
+	/*display: inline-block;*/
+	/*height: 100%;*/
+	/*font-weight: bold;*/
+	/*text-align: center;*/
+/*}*/
 
-#legend_window
-{	
-	position: absolute;
-	display: inline-block;
-	height: 100%;
-	font-weight: bold;
-}
+/*#legend_window*/
+/*{*/
+	/*position: absolute;*/
+	/*display: inline-block;*/
+	/*height: 100%;*/
+	/*font-weight: bold;*/
+/*}*/
 
 
 .bar {

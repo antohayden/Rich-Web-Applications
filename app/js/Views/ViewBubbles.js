@@ -9,7 +9,7 @@ var TaskPerCourseView = Backbone.View.extend({
 
     render : function(){
 
-        this.$el.prepend('<h3>Tasks completed per Course</h3>');
+        this.$el.prepend('<h3>Number of tasks & their duration per Course</h3>');
         var data = this.collection.toJSON();
 
         var diameter = $('#container').width();

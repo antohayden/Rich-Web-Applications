@@ -1,7 +1,59 @@
-/*html*/
-/*{*/
-    /*overflow-y: scroll;*/
-/*}*/
+/*Task 2*/
+
+#task_2_content{
+	width: 100%;
+	position:relative;
+}
+
+@media all and (min-width: 600px){
+	#donut_window{ flex: 1 auto;}
+	#legend_window{ flex: 1 auto;}
+}
+
+.page_header{
+	font-size: 3vw;
+	text-align: center;
+}
+
+.graphic_container{
+	display: flex;
+	/*flex-direction: row;*/
+	/*flex-flow: row wrap;*/
+	flex: 1 100%;
+}
+
+#donut_window {
+	order: 1;
+	margin: auto;
+	min-width: 50%;
+	flex: 1 100%;
+}
+
+#legend_window {
+	order: 2;
+	margin: auto;
+	flex: 1 100%;
+}
+
+path.slice{
+	stroke-width:2px;
+}
+
+polyline{
+	opacity: .3;
+	stroke: black;
+	stroke-width: 2px;
+	fill: none;
+}
+
+svg text.percent{
+	fill:white;
+	text-anchor:top;
+	font-size:16px;
+	text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+/************************************************/
+
 
 
 footer{
@@ -18,46 +70,68 @@ footer{
 }
 
 
-#container
-{
-	width: 80%;
+#container{
+	width: 90%;
 	margin: 20px auto;
 }
 
 
-path.slice{
-	stroke-width:2px;
+#task_3{
+	overflow-x: scroll;
 }
-polyline{
-	opacity: .3;
-	stroke: black;
-	stroke-width: 2px;
-	fill: none;
+
+#task_4_content{
+	position: relative;
 }
-svg text.percent{
-	fill:white;
-	text-anchor:middle;
-	font-size:12px;
+
+#task_4_legend{
+	width:49.5%;
+	position: absolute;
+	right: 0;
+	top: 10%;
+}
+
+#task_4_window{
+	width:49.5%;
+	position: relative;
+	left: 0;
+	top: 10%;
+}
+#task_4_window svg{
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0%); /* Yep! */
+}
+
+
+#task_5 text {
+	font: 10px sans-serif;
+}
+
+#task_5 rect.background {
+	fill: white;
+}
+
+.legend_text{
+	color: white;
+	margin: 3px;
+	font-size: 2vh;
 	text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+	display: inline-block;
 }
 
-/*#donut_window*/
-/*{*/
-	/*position: relative;*/
-	/*display: inline-block;*/
-	/*height: 100%;*/
-	/*font-weight: bold;*/
-	/*text-align: center;*/
-/*}*/
+.legend_body {
+	font-weight: bold;
+}
 
-/*#legend_window*/
-/*{*/
-	/*position: absolute;*/
-	/*display: inline-block;*/
-	/*height: 100%;*/
-	/*font-weight: bold;*/
-/*}*/
+.legend_body > div{
+	border: 1px solid black;
+	padding-left: 5px;
+}
 
+#task_5_content{
+	overflow-x: scroll;
+}
 
 .bar {
   fill: steelblue;
@@ -83,14 +157,28 @@ svg text.percent{
   display: none;
 }
 
-
-#task_5 text {
-  font: 10px sans-serif;
+.modal{
+	display:    none;
+	position:   fixed;
+	z-index:    1000;
+	top:        0;
+	left:       0;
+	height:     100%;
+	width:      100%;
+	background: rgba( 255, 255, 255, .8 )
+	url('../../images/ajax-loader.gif')
+	50% 50%
+	no-repeat;
 }
 
-#task_5 rect.background {
-  fill: white;
+body.loading {
+	overflow: hidden;
 }
+
+body.loading .modal {
+	display: block;
+}
+
 
 
 

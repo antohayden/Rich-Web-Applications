@@ -1,6 +1,6 @@
 
 // Base Url
-var baseURL = "http://localhost/statistics";
+var baseURL = "http://www.antohayden.com/ead/statistics";
 
 //base model
 var BaseModel = Backbone.Model.extend();

@@ -5,7 +5,6 @@
         <title>Student Questionnaires</title>
         <link type="text/css" href="app/css/style.css" rel="stylesheet"/>
 		<link type="text/css" href="app/css/bootstrap.css" rel="stylesheet"/>
-
     </head>
 
     <body>
@@ -69,8 +68,13 @@
 					<div id="collapse2" class="panel-collapse collapse">
 						<section id="task_2" class="panel-body">
 							<article id="task_2_content">
-								<div id="donut_window"></div>
-								<div id="legend_window"><div id="legend_list"></div></div>
+								<header class="page_header">Percentage of Student Nationalities</header>
+								<div class="graphic_container">
+									<div id="donut_window"></div>
+									<div id="legend_window">
+										<div id="legend_list" class="legend_text legend_body"></div>
+									</div>
+								</div>
 							</article>
 						</section>
 					</div>
@@ -86,8 +90,9 @@
 					</div>
 
 					<div id="collapse3" class="panel-collapse collapse">
+
 						<section id="task_3" class="panel-body">
-							<article id="task_3_content"> </article>
+							<article id="task_3_content" class="hideme"> </article>
 						</section>
 					</div>
 
@@ -104,7 +109,7 @@
 					<div id="collapse4" class="panel-collapse collapse">
 						<section id="task_4" class="panel-body">
 							<article id="task_4_content">
-								<div id="task_4_legend"></div>
+								<div id="task_4_legend" class="legend_text legend_body"></div>
 								<div id="task_4_window"></div>
 							</article>
 						</section>
@@ -126,15 +131,6 @@
 				</div>
 
 			</div>
-			<!--Links to W3C validation-->
-		<footer>
-			<hr/>
-			<a href="http://jigsaw.w3.org/css-validator/validator?uri=http://lucalongo.eu/courses/2014-2015/RichWebApplicationTechnology/students/C11733511/finalproject/app/css/style.css">
-			<img src="images/css_validated.png" alt="css validator"/></a>
-
-			<a href="http://validator.w3.org/check?uri=http://lucalongo.eu/courses/2014-2015/RichWebApplicationTechnology/students/C11733511/finalproject/index.html">
-				<img src="images/html5_validated.png" alt="html5 validator"/></a>
-		</footer>
 
         </div>
 
@@ -175,7 +171,6 @@
         </script>
 
         <!-- JavaScript -->
-        <script src="libs/jquery-3.0.0.js"></script>
 		<script src="libs/jquery-2.2.3.js"></script>
         <script src="libs/bootstrap.js"></script>
         <script src="libs/d3.js"></script>
@@ -194,6 +189,9 @@
         <script src="app/js/Views/ViewBubbles.js"></script>
         <script src="app/js/Router/Router.js"></script>
         <script src="app/js/main.js"></script>
+		<script src="app/js/colorGenerator.js"></script>
         <script src="app/js/utils.js"></script>
-    <!--</body>-->
+
+		<div class="modal"></div>
+    </body>
 </html>

@@ -79,6 +79,7 @@ var AppRouter = Backbone.Router.extend({
             }
 
         });
+
     },
 
     nationalities : function () {
@@ -102,7 +103,7 @@ var AppRouter = Backbone.Router.extend({
                             var nationalitiesCountModel = new BaseModel();
                             nationalitiesCountModel.set('country', model.get('description'));
                             nationalitiesCountModel.set('count', studentsOfANationalitieCollection.length);
-                            nationalitiesCountModel.set('color', generateColor());
+                            nationalitiesCountModel.set('color', colorGenerator.getColor());
                             nationalitiesCountCollection.add(nationalitiesCountModel);
 
                             studentsOfANationalitieView.flush();
@@ -119,6 +120,10 @@ var AppRouter = Backbone.Router.extend({
     },
 
     questionnairesPerStudent : function(){
+        
+        var fetchCount;
+        var count = 0;
+
         var studentsCollection = new StudentsCollection();
         var questionnairesByStudentsCount = new BaseCollection();
         var questionnairesByStudentsView = new
@@ -129,21 +134,28 @@ var AppRouter = Backbone.Router.extend({
         studentsCollection.fetch({
 
             success : function(){
+
+                fetchCount = studentsCollection.length;
                 _.each(studentsCollection.models, function(model){
+
                     var questionnairesByAStudent = new QuestionnairesCollectionByStudentId(model.get('student_number'));
 
                     questionnairesByAStudent.fetch({
 
                         success : function(){
+                            count++;
+                            
                             questionnairesByStudentsCount.add({
                                 'student_number' : model.get('student_number'),
                                 'num_questionnaires' : questionnairesByAStudent.length
                             });
-                            questionnairesByStudentsView.flush();
-                            questionnairesByStudentsView.render();
+
+                            if (count === fetchCount){
+                                questionnairesByStudentsView.flush();
+                                questionnairesByStudentsView.render();
+                            }
                         }
                     });
-
                 })
             }
         })
@@ -171,7 +183,7 @@ var AppRouter = Backbone.Router.extend({
 
                         _.each(coursesCollections.models, function(courseModel){
 
-                            var color = generateColor();
+                            var color = colorGenerator.getColor();
                             courseModel.set("color", color);
 
                             _.each(tasksCollection.models, function(taskModel){

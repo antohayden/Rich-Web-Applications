@@ -1,5 +1,8 @@
 //Donut data View
 var StudentsOfANationalitieView = Backbone.View.extend({
+
+    that: this,
+
     el : $('#donut_window'),
 
     render : function() {
@@ -11,16 +14,28 @@ var StudentsOfANationalitieView = Backbone.View.extend({
         nationalitiesListItemView.flush();
         nationalitiesListItemView.render();
 
-        var svg = d3.select("#donut_window").append("svg").attr("width",900).attr("height",500);
+        var width = Math.floor($(window).width());
+
+        var viewBoxCenter = width / 4;
+        var pieChartWidth = width / 5;
+        var viewBoxScale = width / 2;
+        var viewBox = "0, 0 " + viewBoxScale + " " + viewBoxScale;
+
+        var svg = d3.select("#donut_window")
+            .append("svg")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", viewBox)
+            .classed("svg-content", true);
+
         svg.append("g").attr("id","salesDonut");
-        Donut3D.draw("salesDonut", getData(), 400, 200, 300, 200, 30, 0.4);
+        //function(id, data, x /*center x*/, y/*center y*/, rx/*radius x*/, ry/*radius y*/, h/*height*/, ir/*inner radius*/
+        Donut3D.draw("salesDonut", getData(), viewBoxCenter, viewBoxCenter, pieChartWidth, pieChartWidth, 60, 0.4);
 
         function getData(){
             return that.collection.map(function(d){
                 return {label:d.get('country'), value:d.get('count'), color:d.get('color')};
             });
         }
-        this.$el.prepend('<h3>Percentage of Student Nationalities</h3>');
     },
 
     flush : function() {

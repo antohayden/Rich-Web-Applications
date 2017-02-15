@@ -22,15 +22,6 @@ function getMilliSecondsBetweenTime( start, end )
     return duration;
 }
 
-/*
-* Returns a random color
-*/
-
-function generateColor(){
-    var newColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
-    return newColor;
-}
-
 function createCSSClass(selector, style) {
     if (!document.styleSheets) {
         return;
@@ -88,3 +79,5 @@ var contains = function(needle) {
 
     return indexOf.call(this, needle) > -1;
 };
+
+var colorGenerator = new ColorGenerator();

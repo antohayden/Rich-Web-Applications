@@ -43,10 +43,16 @@
 	}
 
 	function getPercent(d){
-		return (d.endAngle-d.startAngle > 0.2 ? 
-				Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10+'%' : '');
-	}	
-	
+
+		return (d.endAngle-d.startAngle > 0.1 ?
+		Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10+'%' : '');
+	}
+
+	function getExactPercent(d){
+
+		return Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10+'%';
+	}
+
 	Donut3D.transition = function(id, data, rx, ry, h, ir){
 		function arcTweenInner(a) {
 		  var i = d3.interpolate(this._current, a);
@@ -77,13 +83,13 @@
 		var _data = d3.layout.pie().sort(null).value(function(d) {return d.value;})(data);
 		
 		d3.select("#"+id).selectAll(".innerSlice").data(_data)
-			.transition().duration(750).attrTween("d", arcTweenInner); 
+			.transition().duration(750).attrTween("d", arcTweenInner);
 			
 		d3.select("#"+id).selectAll(".topSlice").data(_data)
-			.transition().duration(750).attrTween("d", arcTweenTop); 
+			.transition().duration(750).attrTween("d", arcTweenTop);
 			
 		d3.select("#"+id).selectAll(".outerSlice").data(_data)
-			.transition().duration(750).attrTween("d", arcTweenOuter); 	
+			.transition().duration(750).attrTween("d", arcTweenOuter);
 			
 		d3.select("#"+id).selectAll(".percent").data(_data).transition().duration(750)
 			.attrTween("x",textTweenX).attrTween("y",textTweenY).text(getPercent); 	
@@ -106,8 +112,10 @@
 			.style("fill", function(d) { return d.data.color; })
 			.style("stroke", function(d) { return d.data.color; })
 			.attr("d",function(d){ return pieTop(d, rx, ry, ir);})
-			.each(function(d){this._current=d;});
-		
+			.each(function(d){this._current=d;})
+			.append("svg:title")
+			.text(function(d) {return d.data.label + ": " + getExactPercent(d);});
+
 		slices.selectAll(".outerSlice").data(_data).enter().append("path").attr("class", "outerSlice")
 			.style("fill", function(d) { return d3.hsl(d.data.color).darker(0.7); })
 			.attr("d",function(d){ return pieOuter(d, rx-.5,ry-.5, h);})
@@ -116,8 +124,9 @@
 		slices.selectAll(".percent").data(_data).enter().append("text").attr("class", "percent")
 			.attr("x",function(d){ return 0.6*rx*Math.cos(0.5*(d.startAngle+d.endAngle));})
 			.attr("y",function(d){ return 0.6*ry*Math.sin(0.5*(d.startAngle+d.endAngle));})
-			.text(getPercent).each(function(d){this._current=d;});				
+			.text(getPercent).each(function(d){this._current=d;});
 	}
 	
 	this.Donut3D = Donut3D;
 }();
+

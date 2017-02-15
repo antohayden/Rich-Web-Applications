@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Student Questionnaires</title>
+        <link type="text/css" href="css/style.css" rel="stylesheet"/>
+		<link type="text/css" href="css/bootstrap.css" rel="stylesheet"/>
+    </head>
+
+    <body>
+
+        <div id="container">
+			<section>
+				<h2>D3.js, Backbone.js - Demo</h2>
+				<p>
+					Demo of retrieving data from an API and displaying data in a meaningful manner. <br/>
+					<br/>
+					The data set represents a series of multi-choice questionnaires taken by students for tasks assigned by various college courses.
+				</p>
+			</section>
+
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse1" data-toggle="collapse" data-parent="#accordion" href="#questionnaires"> Questionnaire Statistics </a>
+						</h4>
+					</div>
+
+					<div id="collapse1" class="panel-collapse collapse">
+						<div id="task_1" class="panel-body">
+							<article id="task_1_content">
+								<table class="table table-striped" >
+									<thead>
+									<tr>
+										<th>Task ID (Lecture)</th>
+										<th>Number of Questionnaires</th>
+										<th>Average Duration</th>
+										<th>Average Intrusiveness</th>
+									</tr>
+									</thead>
+									<tbody id="task_1_table_body">
+									</tbody>
+									<tr id="avg_values"></tr>
+									<tr id="std_dev_values"></tr>
+								</table>
+
+								<table class="table table-striped" id="avg_table">
+									<tbody id="avg_table_body">
+									</tbody>
+								</table>
+
+							</article>
+						</div>
+
+					</div>
+
+
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse2" href="#nationalities" data-toggle="collapse" data-parent="#accordion"> Breakdown of Student Nationalities </a>
+						</h4>
+					</div>
+
+					<div id="collapse2" class="panel-collapse collapse">
+						<section id="task_2" class="panel-body">
+							<article id="task_2_content">
+								<header class="page_header">Percentage of Student Nationalities</header>
+								<div class="graphic_container">
+									<div id="donut_window"></div>
+									<div id="legend_window">
+										<div id="legend_list" class="legend_text legend_body"></div>
+									</div>
+								</div>
+							</article>
+						</section>
+					</div>
+
+
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse3" href="#questionnairesPerStudent" data-toggle="collapse" data-parent="#accordion">  Number of Questionnaires answered by Student ID </a>
+						</h4>
+					</div>
+
+					<div id="collapse3" class="panel-collapse collapse">
+
+						<section id="task_3" class="panel-body">
+							<article id="task_3_content" class="hideme"> </article>
+						</section>
+					</div>
+
+
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse4" href="#tasksOfACourse" data-toggle="collapse" data-parent="#accordion"> Tasks & Duration per Course </a>
+						</h4>
+					</div>
+
+					<div id="collapse4" class="panel-collapse collapse">
+						<section id="task_4" class="panel-body">
+							<article id="task_4_content">
+								<div id="task_4_legend" class="legend_text legend_body"></div>
+								<div id="task_4_window"></div>
+							</article>
+						</section>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-target="#collapse5" href="#questionnairesOfATask" data-toggle="collapse" data-parent="#accordion"> Number of Questionnaires answered per task </a>
+						</h4>
+					</div>
+
+					<div id="collapse5" class="panel-collapse collapse">
+						<section id="task_5" class="panel-body">
+							<article id="task_5_content"> </article>
+						</section>
+					</div>
+				</div>
+
+			</div>
+
+        </div>
+
+
+        <!-- Templates -->
+		<script type="text/template" id="nationalitiesListItemTemplate"><div><%= country %></div></script>
+        <script type="text/template" id="bubbleListItemTemplate"><div><%= description %></div></script>
+
+		<script type="text/template" id="questionnaires-averages-template">
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+				<td>Avg: <%=  avg_rmse %></td>
+				<td>Avg: <%=  avg_mwl %></td>
+				<td> - </td>
+				<td>Avg: <%=  avg_questionnaire_value %></td>
+				<td>Avg: <%=  avg_duration %></td>
+				<td>Avg: <%=  avg_intrusiveness %></td>
+        </script>
+
+		<script type="text/template" id="questionnaires-dev-template">
+				<td> - </td>
+				<td> - </td>
+				<td> - </td>
+				<td>Dev: <%= std_rmse %></td>
+				<td>Dev: <%= std_mwl %></td>
+				<td> - </td>
+				<td>Dev: <%= std_questionnaire_value %></td>
+				<td>Dev: <%= std_duration %></td>
+				<td>Dev: <%= std_intrusiveness %></td>
+        </script>
+
+        <script type="text/template" id="questionnaires-list-template" >
+							<td><%= task_number %></td>
+							<td><%= num_questionnaires %></td>
+							<td><%= average_duration %></td>
+							<td><%= average_intrusiveness %></td>
+        </script>
+
+		<script src="main.min.js"></script>
+
+		<div class="modal"></div>
+    </body>
+</html>

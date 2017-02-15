@@ -12,11 +12,16 @@ var TaskPerCourseView = Backbone.View.extend({
         this.$el.prepend('<h3>Tasks completed per Course</h3>');
         var data = this.collection.toJSON();
 
-        var diameter = 700;
+        var diameter = $('#container').width();
 
-        var svg = d3.select('#task_4_window').append('svg')
-            .attr('width', diameter)
-            .attr('height', diameter);
+        var viewBoxScale = diameter;
+        var viewBox = "0, 0 " + viewBoxScale + " " + viewBoxScale;
+
+        var svg = d3.select('#task_4_window')
+            .append('svg')
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", viewBox)
+            .classed("svg-content", true);
 
         var bubble = d3.layout.pack()
             .size([diameter, diameter])
@@ -37,7 +42,6 @@ var TaskPerCourseView = Backbone.View.extend({
             .append("svg:title")
             .text(function(d) {return "duration : "+ d.size + " mins";})
             .data("test");
-
 
 
         function processData(data) {
@@ -77,13 +81,6 @@ var CoursesLegendView = Backbone.View.extend({
             var x = that.template(model.toJSON());
             that.$el.append(x);
             that.$el[0].childNodes[index].style.backgroundColor = model.get("color");
-            that.$el[0].childNodes[index].style.border = "solid black 1px";
-            that.$el[0].childNodes[index].style.color = "white";
-            that.$el[0].childNodes[index].style.display = "inline-block";
-            that.$el[0].childNodes[index].style.width = "49%";
-            that.$el[0].childNodes[index].style.margin = "0.5px";
-            that.$el[0].childNodes[index].style.fontSize = "2vh";
-            that.$el[0].childNodes[index].style.textShadow= "1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000";
             index++;
         })
     },

@@ -193,9 +193,9 @@ var AppRouter = Backbone.Router.extend({
                         });
 
                         coursesLegendView.flush();
-                        coursesLegendView.render();
                         tasksPerCourseView.flush();
                         tasksPerCourseView.render();
+                        coursesLegendView.render();
                     }
                 });
 

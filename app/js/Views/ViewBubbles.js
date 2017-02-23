@@ -40,8 +40,8 @@ var TaskPerCourseView = Backbone.View.extend({
                 return d.r; })
             .attr('class', function(d) { return d.className; })
             .append("svg:title")
-            .text(function(d) {return "duration : "+ d.size + " mins";})
-            .data("test");
+            .text(function(d) {return "duration : "+ d.size + " mins";});
+
 
 
         function processData(data) {
@@ -50,18 +50,25 @@ var TaskPerCourseView = Backbone.View.extend({
             var newDataSet = [];
 
             for(var prop in obj) {
-                var sheet = document.styleSheets[0];
-                sheet.addRule(".course_"+ obj[prop].course_id, "fill:" + obj[prop].color , 1);
+
+                var className = "course_"+ obj[prop].course_id;
+                var style = (function() {
+                    var style = document.createElement("style");
+                    style.appendChild(document.createTextNode(""));
+                    document.head.appendChild(style);
+                    return style;
+                })();
+
+                style.sheet.insertRule("." + className + "{fill :" + obj[prop].color + "}", 0);
 
                 newDataSet.push({
                     name: obj[prop].task_id,
-                    className: "course_" + obj[prop].course_id,
+                    className: className,
                     size: parseInt(obj[prop].duration_mins)}
                 );
             }
             return {children: newDataSet};
         }
-
 
     }
 

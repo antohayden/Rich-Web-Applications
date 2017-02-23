@@ -81,3 +81,6 @@ var contains = function(needle) {
 };
 
 var colorGenerator = new ColorGenerator();
+
+
+
